@@ -1,0 +1,5 @@
+.app{
+  max-width: 46rem;
+  margin: calc(0px - 2rem) auto 0;
+  height: 100vh;
+}

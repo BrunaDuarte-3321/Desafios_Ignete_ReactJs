@@ -1,0 +1,40 @@
+.tasks {
+  display:  flex;
+  margin-top: 4rem   ;
+  justify-content: space-between;
+
+  color: var(--blue);
+  font-size:0.875rem ;
+  font-weight: 1.05rem;
+  font-weight: bold;
+
+
+}
+.tasks span{
+  background: var(--gray-400);
+  /* margin: 0 0.5rem; */
+  padding: 0.06rem 0.5rem ;
+  border-radius: 50rem;
+  color: var(--gray-200);
+
+}
+.listTarefa{
+  margin-top: 1.5rem ;
+  border-top: 1px solid var(--gray-300);
+  border-radius: 0.5rem;
+}
+.content{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 4rem ;
+  color: var(--gray-400);
+
+
+}
+.content p{
+  margin-top: 1rem;
+  line-height: 1.4;
+  font-weight: bold;
+}
