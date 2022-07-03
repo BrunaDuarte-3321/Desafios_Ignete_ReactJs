@@ -8,6 +8,7 @@
   height: 3.37rem;
   border-radius: 0.5rem;
   border:  1px solid var(--gray-700);
+  color: var(--gray-200);
 }
 .createTask button{
   background: var(--blue-dark);
@@ -46,15 +47,6 @@
 
 }
 
-.listTarefa {
-  margin-top: 1.5rem;
-}
-.listMain{
-  margin-top: 1.5rem;
-  border-top: 1px solid var(--gray-300);
-  border-radius: 0.5rem;
-}
-
 .content {
   display: flex;
   flex-direction: column;
@@ -69,24 +61,3 @@
   line-height: 1.4;
   font-weight: bold;
 }
-
-.listTasks{
-  display: flex;
-  justify-content: space-between;
-
-  height: 4.5rem;
-  margin-top: 0.75rem;
-
-  border-radius: 0.5rem;
-  border: 1px solid var(--gray-400);
-  background: var(--gray-400);
-  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.06)
-}
-.listTasks strong{
-  max-width:39.5rem;
-  display: flex;
-  align-items: center;
-}
-.listTasks svg{
-  display: flex;
-  margin: 1rem 1rem 2rem ;}

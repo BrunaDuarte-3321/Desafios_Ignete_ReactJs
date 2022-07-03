@@ -3,6 +3,7 @@ import { ChangeEvent, FormEvent, HTMLInputTypeAttribute, useState } from 'react'
 import { ClipboardText, Trash  } from 'phosphor-react';
 
 import styles from '../styles/CreateTask.module.css';
+import { Tasks } from './Tasks';
 
 export const CreateTask = () => {
   const [tasks, setTasks] = useState<string[]>([])
@@ -16,6 +17,13 @@ export const CreateTask = () => {
     event.preventDefault()
     setTasks([...tasks, newTask])
     setNewTasks('');
+  }
+  const deletTask = (contentToDelet: string) => {
+    const commentWithoutDeletOne = tasks.filter((content) => {
+      return content !== contentToDelet;
+    })
+    console.log('cliquei')
+    setTasks(commentWithoutDeletOne)
   }
   return (
     <>
@@ -33,29 +41,7 @@ export const CreateTask = () => {
           <PlusCircle/>
         </button>
       </form>
-      <aside className={styles.tasks}>
-        <strong>Tarefas Criadas <span>0</span></strong>
-        <strong>Concluídas <span>0</span></strong>
-      </aside>
-      <main className={tasks.length === 0 ? styles.listMain : styles.listTarefa } >
-        {tasks?.length === 0 ? (
-          <div className={styles.content}>
-          <ClipboardText size={56}/>
-          <p>Você não tem tarefas cadastradas</p>
-          <span>Crie tarefas e organize seis itens a fazer</span>
-        </div>
-        ) : <>
-            {tasks.map((item) => {
-              return (
-                <div className={styles.listTasks}>
-                  <Circle size={24}/>
-                  <strong>{item}</strong>
-                  <Trash size={24}/>
-                </div>
-              )
-            })}
-        </>}
-      </main>
+      <Tasks tasks={tasks} onDeletTask={deletTask}/>
     </>
 
   )
