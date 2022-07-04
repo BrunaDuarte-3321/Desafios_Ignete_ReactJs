@@ -1,44 +1,27 @@
-import { Circle, ClipboardText, Trash} from 'phosphor-react';
-
 import styles from '../styles/Tasks.module.css';
+import { Trash, Circle } from 'phosphor-react';
 
-interface ITasks {
-  tasks: string[];
-  onDeletTask: (content:string) => void;
+interface ITask{
+  task: string;
+  deletcontentTask: (contentDelet: string) => void
 }
+export const Tasks = ({ task, deletcontentTask }:ITask) => {
 
-export const Tasks = ({ tasks, onDeletTask }: ITasks) => {
-  
-  const handleDeletTasks = () => {
-    onDeletTask(tasks);
+  const handleDeletTask = () => {
+    deletcontentTask(task)
   }
-
   return (
     <>
-      <aside className={styles.tasks}>
-        <strong>Tarefas Criadas <span>0</span></strong>
-        <strong>Concluídas <span>0</span></strong>
-      </aside>
-      <main className={tasks.length === 0 ? styles.listMain : styles.listTarefa } >
-        {tasks?.length === 0 ? (
-          <div className={styles.content}>
-          <ClipboardText size={56}/>
-          <p>Você não tem tarefas cadastradas</p>
-          <span>Crie tarefas e organize seis itens a fazer</span>
+      <main>
+        <div className={styles.listTasks}>
+          <button><Circle size={24} /></button>
+          <strong>{task}</strong>
+          <button onClick={handleDeletTask} title='Deletar tarefa'>
+            <Trash size={24} />
+          </button>
         </div>
-        ) : <>
-            {tasks.map((item) => {
-              return (
-                <div key={item} className={styles.listTasks}>
-                  <Circle size={24}/>
-                  <strong>{item}</strong>
-                  <button onClick={handleDeletTasks}><Trash size={24}/></button>
-                </div>
-              )
-            })}
-        </>}
-      </main>{/*  */}
-
+      </main>
     </>
+
   )
 }
