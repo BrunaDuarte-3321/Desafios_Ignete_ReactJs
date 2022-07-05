@@ -1,34 +1,58 @@
-import { ChangeEvent, FormEvent, useState } from 'react';
-import {ClipboardText} from 'phosphor-react'
+import { ChangeEvent, FormEvent, InvalidEvent, useState } from 'react';
+import {ClipboardText, PlusCircle} from 'phosphor-react'
 import styles from '../styles/CreateTask.module.css';
 import { Tasks } from './Tasks';
 export const CreateTask = () => {
 
-
-  const [tasks, setTasks] = useState<string[]>([
-
-  ])
-
+  const [tasks, setTasks] = useState<string[]>([])
   const [newTask, setNewTesk] = useState('');
+  const [countTask, setCountTask] = useState(0);
+
+  const [countConcluded, setCountConcluded] = useState(0)
+
+  const countNewTask = () => {
+    setCountTask(tasks.length + 1);
+  }
+
+  const handleCountConcluded = (event: boolean) => {
+    if (event ) {
+      setCountConcluded(countConcluded -1)
+    }
+    else {
+       setCountConcluded(countConcluded + 1)
+    }
+
+  }
 
   const handleCreateNewTask = (event:FormEvent) => {
     event.preventDefault();
     setTasks([...tasks, newTask]);
     setNewTesk('')
+
   }
   const handleNewTaskText = (event:ChangeEvent<HTMLInputElement>) => {
-    event.preventDefault();
+    event.target.setCustomValidity('')
     setNewTesk(event.target.value);
   }
-
   const deletcontentTask = (contetTask: string) => {
-
     const deletWithoutTaskOne = tasks.filter(deletTask => {
       return deletTask !== contetTask
     })
-    console.log(`vou deletar essa takss ${contetTask}`)
-    setTasks(deletWithoutTaskOne)
+    setTasks(deletWithoutTaskOne);
+    setCountTask(tasks.length - 1)
+
+    if (countConcluded >= 0) {
+      setCountConcluded(countConcluded -1 )
+    }
+
   }
+
+  const handleTaskInvalid = (event:InvalidEvent<HTMLInputElement>) => {
+
+    event.target.setCustomValidity('Esté campo é obrigatório!')
+  }
+
+  const isNewTaskEmpty = newTask.length === 0;
   return (
     <>
       <form onSubmit={handleCreateNewTask}  className={styles.createTask}>
@@ -36,14 +60,24 @@ export const CreateTask = () => {
           value={newTask}
           onChange={handleNewTaskText}
           type="text"
-          placeholder="Crie sua tarefa"
+          placeholder="Adicona uma nova tarefa"
+          onInvalid={handleTaskInvalid}
+          required
 
         />
-        <button type="submit">Criar</button>
+        <button
+          onClick={countNewTask}
+          type="submit"
+          disabled={isNewTaskEmpty}
+        >
+
+          Criar
+          <PlusCircle size={16}/>
+        </button>
       </form>
       <div className={styles.tasks}>
-        <strong>Tarefas Criadas <span>0</span></strong>
-        <strong>Concluídas <span>0</span></strong>
+        <strong>Tarefas Criadas <span>{countTask }</span></strong>
+        <strong>Concluídas <span>{countConcluded }</span></strong>
       </div>
       {tasks.length <= 0 ?
         (
@@ -58,7 +92,7 @@ export const CreateTask = () => {
         (
             <div className={styles.listTarefa}>
               {tasks.map(task => {
-                return  <Tasks deletcontentTask={deletcontentTask} task={task } />
+                return <Tasks handleCountConcluded={handleCountConcluded}   deletcontentTask={deletcontentTask} task={task } />
               })}
             </div>
           )}

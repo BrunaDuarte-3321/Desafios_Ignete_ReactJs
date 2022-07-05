@@ -1,27 +1,56 @@
 import styles from '../styles/Tasks.module.css';
-import { Trash, Circle } from 'phosphor-react';
+import { Trash, Circle, Check } from 'phosphor-react';
+import { useState } from 'react';
 
 interface ITask{
   task: string;
-  deletcontentTask: (contentDelet: string) => void
+  deletcontentTask: (contentDelet: string) => void;
+  handleCountConcluded: (concluded: boolean) => void;
+
 }
-export const Tasks = ({ task, deletcontentTask }:ITask) => {
+export const Tasks = ({ task, deletcontentTask, handleCountConcluded }: ITask) => {
+
+  const [checkTask, setCheckTask] = useState(false)
 
   const handleDeletTask = () => {
-    deletcontentTask(task)
+    deletcontentTask(task);
   }
+
+  const validateTask = () => {
+    if (!checkTask) {
+      setCheckTask(true)
+      handleCountConcluded(checkTask)
+
+    }
+    else {
+      setCheckTask(false)
+      handleCountConcluded(checkTask)
+    }
+  }
+
   return (
-    <>
+     <>
       <main>
         <div className={styles.listTasks}>
-          <button><Circle size={24} /></button>
-          <strong>{task}</strong>
-          <button onClick={handleDeletTask} title='Deletar tarefa'>
-            <Trash size={24} />
+          <div className={!checkTask ? styles.circle : styles.circleCheck}>
+            <button onClick={validateTask}>
+
+              {!checkTask ? (
+                <Circle size={17.45}/>
+              ): <Check size={14} />}
+            </button>
+          </div>
+          {checkTask ? (
+            <strong className={styles.lineCheck}>{task}</strong>
+          ):<strong>{task}</strong>}
+
+          <div className={styles.trash}>
+            <button onClick={handleDeletTask} title='Deletar tarefa'>
+            <Trash size={17.45} />
           </button>
+          </div>
         </div>
       </main>
     </>
-
   )
 }
