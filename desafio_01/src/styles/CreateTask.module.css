@@ -12,7 +12,16 @@
   border: 1px solid var(--gray-700);
   color: var(--gray-200);
 }
+.listMain {
+  margin-top: 1.5rem;
+  border-top: 1px solid var(--gray-300);
+  border-radius: 0.5rem;
+}
 
+.listTarefa {
+  margin-top: 1.5rem;
+
+}
 .createTask button {
   background: var(--blue-dark);
   color: var(--gray-200);
@@ -63,4 +72,22 @@
   margin-top: 1rem;
   line-height: 1.4;
   font-weight: bold;
+}
+
+@media(max-width:600px) {
+  .createTask  {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  .createTask input{
+    max-width: 20rem;
+  }
+  .content {
+    margin-top: 1rem;
+  }
+  .tasks{
+    padding: 0 0.5rem;
+  }
 }

@@ -12,15 +12,7 @@
   box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.06)
 }
 
-.listMain {
-  margin-top: 1.5rem;
-  border-top: 1px solid var(--gray-300);
-  border-radius: 0.5rem;
-}
 
-.listTarefa {
-  margin-top: 1.5rem;
-}
 
 .listTasks strong {
   max-width: 39.5rem;
@@ -79,3 +71,5 @@
   text-decoration: line-through;
   color: var(--gray-300);
 }
+
+ 
